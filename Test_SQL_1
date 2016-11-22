@@ -1,11 +1,16 @@
 SELECT KDAU_Nr AS Auftragsnummer,
 	   KDAU_AuftrDat As Auftragsdatum,		
 	   KD_Nr AS Kundennummer,
-	   KD_Name AS Firma
-	  
+	   KD_Name AS Firma,
+	   PE_Name As Vrkäufer
 
 
 
-FROM Kunden INNER JOIN Kundenaufträge AS Kun ON Kunden.KD_Nr = Kun.KDAU_KDNr 		
+FROM 
+Personal INNER JOIN (Kunden INNER JOIN Kundenaufträge AS Kun ON Kunden.KD_Nr = Kun.KDAU_KDNr )		
+                                                                 
+                                                             ON Personal.PE_Nr = Kun.KDAU_PENr 
+
+
 
 WHERE Kunden.KD_VName IS NULL AND Kunden.KD_Name <> 'Ladenverkauf'
