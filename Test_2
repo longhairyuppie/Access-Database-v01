@@ -1,0 +1,24 @@
+SELECT KD_GebDat AS Geburtstag,
+      CLNG(KD_GebDat) AS Datumswert,
+      DAY (KD_GebDat) AS TAG,
+	  IIF (DAY (KD_GebDat)  MOD 2 =0 , 'Yes', 'No') AS gerade,
+	  DATEPART ('y', KD_GebDat) AS Kalendertag,
+      WEEKDAY (KD_GebDat, 2) AS Wochentagnummer,
+      WEEKDAYNAME(WEEKDAY (KD_GebDat, 2)) AS Wochenname,
+      DATEPART ('ww', KD_GebDat, 2,2 ) AS Kalenderwoche ,
+      MONTH(KD_GebDat) AS Monat,
+      MONTHNAME ( MONTH(KD_GebDat)) AS Monatsname,
+      
+      IIF (MONTH(KD_GebDat) <= 6, 'erstes halbjahr', 'zweites halbjahr') AS Halbjahr,
+      IIF (YEAR(KD_GebDat) MOD 4 =0 AND (YEAR(KD_GebDat) MOD 100 <>0 OR YEAR(KD_GebDat) MOD 400=0), 'Schaltjahr', 'kein Schaltjahr')
+
+
+FROM Kunden AS KU 
+
+
+
+
+WHERE KD_GebDat <> 0
+
+
+
